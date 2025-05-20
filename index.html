@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveEasy - Premium Car Rental Service</title>
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #3563E9;
+        }
+
+        .logo span {
+            color: #333;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #3563E9;
+        }
+
+        .auth-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sign-in {
+            background-color: transparent;
+            color: #3563E9;
+            margin-right: 10px;
+        }
+
+        .register {
+            background-color: #3563E9;
+            color: white;
+        }
+
+        .sign-in:hover {
+            background-color: #f0f0f0;
+        }
+
+        .register:hover {
+            background-color: #2951c5;
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Search Form Styles */
+        .search-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: -50px auto 50px;
+            position: relative;
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .search-btn {
+            background-color: #3563E9;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            grid-column: 1 / -1;
+            margin-top: 10px;
+        }
+
+        .search-btn:hover {
+            background-color: #2951c5;
+        }
+
+        /* Featured Cars Section */
+        .featured-cars {
+            padding: 50px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #666;
+        }
+
+        .car-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .car-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .car-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .car-details {
+            padding: 20px;
+        }
+
+        .car-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .car-title h3 {
+            font-size: 1.3rem;
+        }
+
+        .car-year {
+            color: #666;
+        }
+
+        .car-features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .car-feature {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .car-feature i {
+            margin-right: 5px;
+            color: #3563E9;
+        }
+
+        .car-price-rent {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .car-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .car-price span {
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .rent-now-btn {
+            background-color: #3563E9;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .rent-now-btn:hover {
+            background-color: #2951c5;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 5%;
+            background-color: #f0f5ff;
+        }
+
+        .steps-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-icon {
+            background-color: #e6eeff;
+            color: #3563E9;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+        }
+
+        .step h3 {
+            margin-bottom: 15px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .testimonial-user {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .user-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .user-rating {
+            color: #ffc107;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 80px 5%;
+            background-color: #3563E9;
+            color: white;
+        }
+
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            margin-bottom: 30px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .newsletter-btn {
+            background-color: #2951c5;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background-color: #1e3fa1;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #222;
+            color: #ddd;
+            padding: 50px 5% 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: white;
+        }
+
+        .footer-contact p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: #3563E9;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin: 20px 0;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .auth-buttons {
+                margin-top: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .search-container {
+                margin-top: -25px;
+                padding: 20px;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 5px;
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo">Drive<span>Easy</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Cars</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="sign-in">Sign In</button>
+                <button class="register">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find Your Perfect Rental Car</h1>
+            <p>Experience premium cars at affordable prices. Drive in style with our extensive fleet of vehicles.</p>
+        </div>
+    </section>
+
+    <!-- Search Form Section -->
+    <div class="search-container">
+        <form class="search-form" id="search-form">
+            <div class="form-group">
+                <label for="pickup-location">Pickup Location</label>
+                <input type="text" id="pickup-location" placeholder="City, Airport, etc." required>
+            </div>
+            <div class="form-group">
+                <label for="pickup-date">Pickup Date</label>
+                <input type="date" id="pickup-date" required>
+            </div>
+            <div class="form-group">
+                <label for="return-date">Return Date</label>
+                <input type="date" id="return-date" required>
+            </div>
+            <div class="form-group">
+                <label for="car-type">Car Type</label>
+                <select id="car-type">
+                    <option value="">All Types</option>
+                    <option value="economy">Economy</option>
+                    <option value="compact">Compact</option>
+                    <option value="midsize">Midsize</option>
+                    <option value="suv">SUV</option>
+                    <option value="luxury">Luxury</option>
+                </select>
+            </div>
+            <button type="submit" class="search-btn">Search Available Cars</button>
+        </form>
+    </div>
+
+    <!-- Featured Cars Section -->
+    <section class="featured-cars">
+        <div class="section-title">
+            <h2>Featured Cars</h2>
+            <p>Explore our top-rated vehicles for your next journey</p>
+        </div>
+        <div class="car-grid" id="car-grid">
+            <!-- Car cards will be populated here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Rent a car in 3 simple steps</p>
+        </div>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Find your car</h3>
+                <p>Search our extensive fleet to find the perfect vehicle for your needs.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Make a reservation</h3>
+                <p>Choose your dates and options, and book your car instantly.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h3>Enjoy your ride</h3>
+                <p>Pick up your car and enjoy the freedom of the open road.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-title">
+            <h2>What Our Customers Say</h2>
+            <p>Read testimonials from our satisfied clients</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "The rental process was incredibly smooth, and the car was in perfect condition. I'll definitely use DriveEasy again for my next trip!"
+                </div>
+                <div class="testimonial-user">
+                    <img src="/api/placeholder/50/50" alt="User Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h4>Jennifer R.</h4>
+                        <div class="user-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "Great selection of cars and even better prices. The customer service was excellent, helping me choose the right vehicle for my family vacation."
+                </div>
+                <div class="testimonial-user">
+                    <img src="/api/placeholder/50/50" alt="User Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h4>Michael T.</h4>
+                        <div class="user-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "I've rented from many companies before, but DriveEasy stands out for their professionalism and quality of vehicles. Will recommend to all my colleagues!"
+                </div>
+                <div class="testimonial-user">
+                    <img src="/api/placeholder/50/50" alt="User Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <h4>Sarah K.</h4>
+                        <div class="user-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get exclusive offers, new car alerts, and travel tips straight to your inbox.</p>
+            <form class="newsletter-form" id="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Your Email Address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">DriveEasy</div>
+                <p>Premium car rental service offering a wide range of vehicles for all your travel needs. Quality and customer satisfaction guaranteed.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Cars</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Our Services</h3>
+                <ul>
+                    <li><a href="#">City Rentals</a></li>
+                    <li><a href="#">Airport Transfers</a></li>
+                    <li><a href="#">Corporate Rentals</a></li>
+                    <li><a href="#">Luxury Cars</a></li>
+                    <li><a href="#">Long Term Rentals</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Business Avenue, City Center</p>
+                <p><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@driveeasy.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM - 8PM</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 DriveEasy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Section -->
+    <script>
+        // Sample car data (in a real application, this would come from a database)
+        const cars = [
+            {
+                id: 1,
+                name: "Toyota Camry",
+                year: 2023,
+                image: "/api/placeholder/300/200",
+                type: "Sedan",
+                fuel: "Hybrid",
+                seats: 5,
+                transmission: "Automatic",
+                price: 60,
+                available: true
+            },
+            {
+                id: 2,
+                name: "Honda CR-V",
+                year: 2022,
+                image: "/api/placeholder/300/200",
+                type: "SUV",
+                fuel: "Gasoline",
+                seats: 5,
+                transmission: "Automatic",
+                price: 75,
+                available: true
+            },
+            {
+                id: 3,
+                name: "Mercedes-Benz E-Class",
+                year: 2023,
+                image: "/api/placeholder/300/200",
+                type: "Luxury",
+                fuel: "Gasoline",
+                seats: 5,
+                transmission: "Automatic",
+                price: 150,
+                available: true
+            },
+            {
+                id: 4,
+                name: "Ford Mustang",
+                year: 2022,
+                image: "/api/placeholder/300/200",
+                type: "Sports",
+                fuel: "Gasoline",
+                seats: 4,
+                transmission: "Automatic",
+                price: 120,
+                available: true
+            },
+            {
+                id: 5,
+                name: "Nissan Altima",
+                year: 2023,
+                image: "/api/placeholder/300/200",
+                type: "Sedan",
+                fuel: "Gasoline",
+                seats: 5,
+                transmission: "Automatic",
+                price: 55,
+                available: true
+            },
+            {
+                id: 6,
+                name: "Jeep Wrangler",
+                year: 2022,
+                image: "/api/placeholder/300/200",
+                type: "SUV",
+                fuel: "Gasoline",
+                seats: 5,
+                transmission: "Manual",
+                price: 85,
+                available: true
+            }
+        ];
+
+        // Function to create car cards
+        function createCarCards() {
+            const carGrid = document.getElementById('car-grid');
+            carGrid.innerHTML = '';
+
+            cars.forEach(car => {
+                const carCard = document.createElement('div');
+                carCard.className = 'car-card';
+                carCard.innerHTML = `
+                    <img src="${car.image}" alt="${car.name}" class="car-image">
+                    <div class="car-details">
+                        <div class="car-title">
+                            <h3>${car.name}</h3>
+                            <span class="car-year">${car.year}</span>
+                        </div>
+                        <div class="car-features">
+                            <span class="car-feature"><i class="fas fa-car"></i> ${car.type}</span>
+                            <span class="car-feature"><i class="fas fa-gas-pump"></i> ${car.fuel}</span>
+                            <span class="car-feature"><i class="fas fa-user"></i> ${car.seats} seats</span>
+                        </div>
+                        <div class="car-price-rent">
+                            <div class="car-price">$${car.price}<span>/day</span></div>
+                            <button class="rent-now-btn" data-id="${car.id}">Rent Now</button>
+                        </div>
+                    </div>
+                `;
+                carGrid.appendChild(carCard);
+            });
+
+            // Add event listeners to rent buttons
+            document.querySelectorAll('.rent-now-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const carId = this.getAttribute('data-id');
+                    rentCar(carId);
+                });
+            });
+        }
+
+        // Function to handle car rental
+        function rentCar(carId) {
+            const car = cars.find(c => c.id == carId);
+            if (car && car.available) {
+                alert(`You have selected the ${car.name} (${car.year}). Please proceed to the booking form.`);
+                // In a real application, this would redirect to a booking page or open a modal
+                scrollToSearchForm();
+            } else {
+                alert('Sorry, this car is not available for rent.');
+            }
+        }
+
+        // Function to scroll to search form
+        function scrollToSearchForm() {
+            const searchForm = document.getElementById('search-form');
+            searchForm.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Function to validate date inputs
+        function validateDates() {
+            const pickupDate = new Date(document.getElementById('pickup-date').value);
+            const returnDate = new Date(document.getElementById('return-date').value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            if (pickupDate < today) {
+                alert('Pickup date cannot be in the past.');
+                return false;
+            }
+
+            if (returnDate < pickupDate) {
+                alert('Return date must be after pickup date.');
+                return false;
+            }
+
+            return true;
+        }
+
+        // Function to handle search form submission
+        function handleSearchSubmit(event) {
+            event.preventDefault();
+            
+            if (!validateDates()) {
+                return;
+            }
+
+            const location = document.getElementById('pickup-location').value;
+            const pickupDate = document.getElementById('pickup-date').value;
+            const returnDate = document.getElementById('return-date').value;
+            const carType = document.getElementById('car-type').value;
+
+            // In a real application, this would filter cars based on the search criteria
+            // For this demo, we'll just show an alert with the search parameters
+            alert(`Searching for ${carType ? carType : 'all'} cars in ${location} from ${pickupDate} to ${returnDate}`);
+            
+            // Filter cars (in a real app, this would call an API)
+            filterCars(carType);
+        }
+
+        // Function to filter cars based on type
+        function filterCars(type) {
+            let filteredCars;
+            
+            if (type) {
+                filteredCars = cars.filter(car => car.type.toLowerCase() === type.toLowerCase());
+            } else {
+                filteredCars = [...cars];
+            }
+
+            // In a real application, this would update the car grid with filtered results
+            if (filteredCars.length > 0) {
+                alert(`Found ${filteredCars.length} cars matching your criteria.`);
+            } else {
+                alert('No cars found matching your criteria. Please try different search parameters.');
+            }
+        }
+
+        // Function to handle newsletter form submission
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = document.querySelector('.newsletter-input').value;
+            if (email) {
+                alert(`Thank you for subscribing with ${email}! You will now receive our latest offers and updates.`);
+                document.querySelector('.newsletter-input').value = '';
+            }
+        }
+
+        // Mobile menu toggle functionality
+        function setupMobileMenu() {
+            const mediaQuery = window.matchMedia('(max-width: 768px)');
+            
+            if (mediaQuery.matches) {
+                const nav = document.querySelector('nav');
+                const menuButton = document.createElement('button');
+                menuButton.className = 'mobile-menu-btn';
+                menuButton.innerHTML = '<i class="fas fa-bars"></i>';
+                
+                document.querySelector('.header-container').insertBefore(
+                    menuButton, 
+                    document.querySelector('.logo').nextSibling
+                );
+                
+                menuButton.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    this.innerHTML = nav.classList.contains('active') 
+                        ? '<i class="fas fa-times"></i>' 
+                        : '<i class="fas fa-bars"></i>';
+                });
+            }
+        }
+
+        // Car Detail Modal
+        function createCarDetailModal() {
+            const modal = document.createElement('div');
+            modal.className = 'car-detail-modal';
+            modal.style.display = 'none';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <div class="car-detail-content"></div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Style for the modal
+            const style = document.createElement('style');
+            style.textContent = `
+                .car-detail-modal {
+                    display: none;
+                    position: fixed;
+                    z-index: 1000;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0,0,0,0.7);
+                    overflow-y: auto;
+                }
+                .modal-content {
+                    position: relative;
+                    background-color: white;
+                    margin: 10% auto;
+                    padding: 30px;
+                    width: 70%;
+                    max-width: 800px;
+                    border-radius: 10px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                    animation: modalFadeIn 0.3s;
+                }
+                @keyframes modalFadeIn {
+                    from {opacity: 0; transform: translateY(-50px);}
+                    to {opacity: 1; transform: translateY(0);}
+                }
+                .close-modal {
+                    position: absolute;
+                    right: 20px;
+                    top: 15px;
+                    font-size: 28px;
+                    font-weight: bold;
+                    color: #aaa;
+                    cursor: pointer;
+                }
+                .close-modal:hover {
+                    color: #333;
+                }
+                .car-detail-gallery {
+                    display: grid;
+                    grid-template-columns: 3fr 1fr;
+                    gap: 15px;
+                    margin-bottom: 20px;
+                }
+                .car-detail-main-img {
+                    width: 100%;
+                    height: 300px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                }
+                .car-detail-thumbnails {
+                    display: grid;
+                    grid-template-rows: repeat(3, 1fr);
+                    gap: 10px;
+                }
+                .car-detail-thumbnail {
+                    width: 100%;
+                    height: 90px;
+                    object-fit: cover;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: opacity 0.3s;
+                }
+                .car-detail-thumbnail:hover {
+                    opacity: 0.8;
+                }
+                .car-detail-info {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 30px;
+                }
+                .car-detail-description h2 {
+                    margin-bottom: 15px;
+                    font-size: 1.8rem;
+                }
+                .car-detail-description p {
+                    margin-bottom: 20px;
+                    color: #666;
+                    line-height: 1.6;
+                }
+                .car-detail-meta {
+                    background-color: #f8f9fa;
+                    padding: 20px;
+                    border-radius: 10px;
+                }
+                .car-detail-meta h3 {
+                    margin-bottom: 15px;
+                    font-size: 1.4rem;
+                }
+                .car-detail-features {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 15px;
+                    margin-bottom: 20px;
+                }
+                .car-detail-feature {
+                    display: flex;
+                    align-items: center;
+                }
+                .car-detail-feature i {
+                    margin-right: 10px;
+                    color: #3563E9;
+                    font-size: 1.2rem;
+                }
+                .car-detail-price {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    margin: 20px 0;
+                }
+                .car-detail-price span {
+                    font-size: 1rem;
+                    color: #666;
+                    font-weight: 400;
+                }
+                .car-detail-actions {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 15px;
+                }
+                .car-detail-book-btn {
+                    background-color: #3563E9;
+                    color: white;
+                    border: none;
+                    padding: 12px;
+                    border-radius: 5px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+                .car-detail-book-btn:hover {
+                    background-color: #2951c5;
+                }
+                .car-detail-contact-btn {
+                    background-color: transparent;
+                    color: #3563E9;
+                    border: 1px solid #3563E9;
+                    padding: 12px;
+                    border-radius: 5px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                }
+                .car-detail-contact-btn:hover {
+                    background-color: #f0f5ff;
+                }
+                @media (max-width: 768px) {
+                    .modal-content {
+                        width: 90%;
+                        margin: 20% auto;
+                    }
+                    .car-detail-gallery {
+                        grid-template-columns: 1fr;
+                    }
+                    .car-detail-thumbnails {
+                        grid-template-columns: repeat(3, 1fr);
+                        grid-template-rows: none;
+                    }
+                    .car-detail-info {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Close modal functionality
+            const closeBtn = document.querySelector('.close-modal');
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            // Close when clicking outside the modal content
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            return modal;
+        }
+
+        // Function to show car details in modal
+        function showCarDetails(carId) {
+            const car = cars.find(c => c.id == carId);
+            if (!car) return;
+
+            const modal = document.querySelector('.car-detail-modal') || createCarDetailModal();
+            const content = modal.querySelector('.car-detail-content');
+            
+            content.innerHTML = `
+                <div class="car-detail-gallery">
+                    <img src="${car.image}" alt="${car.name}" class="car-detail-main-img">
+                    <div class="car-detail-thumbnails">
+                        <img src="${car.image}" alt="${car.name} View 1" class="car-detail-thumbnail">
+                        <img src="${car.image}" alt="${car.name} View 2" class="car-detail-thumbnail">
+                        <img src="${car.image}" alt="${car.name} View 3" class="car-detail-thumbnail">
+                    </div>
+                </div>
+                <div class="car-detail-info">
+                    <div class="car-detail-description">
+                        <h2>${car.name} ${car.year}</h2>
+                        <p>Experience the perfect blend of style, comfort, and performance with our ${car.name}. This ${car.type.toLowerCase()} offers exceptional fuel efficiency, smooth handling, and all the modern amenities you need for a pleasant journey.</p>
+                        <p>Whether you're planning a business trip or a family vacation, this vehicle provides ample space and reliability for all your travel needs.</p>
+                    </div>
+                    <div class="car-detail-meta">
+                        <h3>Car Specifications</h3>
+                        <div class="car-detail-features">
+                            <div class="car-detail-feature">
+                                <i class="fas fa-car"></i>
+                                <span>Type: ${car.type}</span>
+                            </div>
+                            <div class="car-detail-feature">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>Fuel: ${car.fuel}</span>
+                            </div>
+                            <div class="car-detail-feature">
+                                <i class="fas fa-cog"></i>
+                                <span>Transmission: ${car.transmission}</span>
+                            </div>
+                            <div class="car-detail-feature">
+                                <i class="fas fa-user"></i>
+                                <span>Seats: ${car.seats}</span>
+                            </div>
+                            <div class="car-detail-feature">
+                                <i class="fas fa-suitcase"></i>
+                                <span>Luggage: 3 Bags</span>
+                            </div>
+                            <div class="car-detail-feature">
+                                <i class="fas fa-snowflake"></i>
+                                <span>A/C: Yes</span>
+                            </div>
+                        </div>
+                        <div class="car-detail-price">
+                            ${car.price}<span>/day</span>
+                        </div>
+                        <div class="car-detail-actions">
+                            <button class="car-detail-book-btn">Book Now</button>
+                            <button class="car-detail-contact-btn">Contact Us</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Show modal
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
+            
+            // Add event listeners to booking buttons
+            modal.querySelector('.car-detail-book-btn').addEventListener('click', () => {
+                alert(`You have selected to book the ${car.name} (${car.year}). Please proceed to the booking form.`);
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                scrollToSearchForm();
+            });
+            
+            modal.querySelector('.car-detail-contact-btn').addEventListener('click', () => {
+                alert(`Our customer service team will contact you about the ${car.name} (${car.year}) shortly.`);
+            });
+        }
+
+        // Initialize the application
+        function initApp() {
+            // Create car cards on page load
+            createCarCards();
+            
+            // Add event listener to search form
+            document.getElementById('search-form').addEventListener('submit', handleSearchSubmit);
+            
+            // Add event listener to newsletter form
+            document.getElementById('newsletter-form').addEventListener('submit', handleNewsletterSubmit);
+            
+            // Setup mobile menu if needed
+            setupMobileMenu();
+            
+            // Add click events to car cards for details
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('car-image') || 
+                    (e.target.tagName === 'H3' && e.target.closest('.car-card'))) {
+                    const carCard = e.target.closest('.car-card');
+                    const rentButton = carCard.querySelector('.rent-now-btn');
+                    const carId = rentButton.getAttribute('data-id');
+                    showCarDetails(carId);
+                }
+            });
+            
+            // Set minimum dates for the date inputs
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('pickup-date').min = today;
+            document.getElementById('return-date').min = today;
+            
+            // Handle pickup date change to enforce return date is not before pickup
+            document.getElementById('pickup-date').addEventListener('change', function() {
+                document.getElementById('return-date').min = this.value;
+                
+                // If return date is before new pickup date, update it
+                const returnDate = document.getElementById('return-date');
+                if (returnDate.value && returnDate.value < this.value) {
+                    returnDate.value = this.value;
+                }
+            });
+        }
+
+        // Run the app when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
